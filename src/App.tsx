@@ -1,5 +1,7 @@
 import {StyleSheet} from 'react-native';
 
+import {ThemeProvider} from '@rneui/themed';
+import theme from '@theme/theme';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -10,13 +12,15 @@ import NavigationStack from './navigation';
 function App(): JSX.Element {
   return (
     <SafeAreaProvider>
-      <StorageProvider>
-        <AuthProvider>
-          <GestureHandlerRootView style={styles.gesture}>
-            <NavigationStack />
-          </GestureHandlerRootView>
-        </AuthProvider>
-      </StorageProvider>
+      <ThemeProvider theme={theme}>
+        <StorageProvider>
+          <AuthProvider>
+            <GestureHandlerRootView style={styles.gesture}>
+              <NavigationStack />
+            </GestureHandlerRootView>
+          </AuthProvider>
+        </StorageProvider>
+      </ThemeProvider>
     </SafeAreaProvider>
   );
 }

@@ -3,6 +3,7 @@ module.exports = {
   extends: ['@react-native-community', 'plugin:react/jsx-runtime'],
   plugins: ['import'],
   rules: {
+    'react-hooks/exhaustive-deps': 'off',
     // this is for sorting WITHIN an import
     'sort-imports': ['error', {ignoreCase: true, ignoreDeclarationSort: true}],
     // this is for sorting imports

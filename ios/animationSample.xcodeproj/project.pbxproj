@@ -12,8 +12,14 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		286E17D46E854BCFB61E8FC2 /* OffBitTrial-Dot.otf in Resources */ = {isa = PBXBuildFile; fileRef = 386D86E8719941C1AE5A72CF /* OffBitTrial-Dot.otf */; };
 		7699B88040F8A987B510C191 /* libPods-animationSample-animationSampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-animationSample-animationSampleTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		86A56881EC2C4FE5A8C2A880 /* OffBitTrial-101.otf in Resources */ = {isa = PBXBuildFile; fileRef = F97524F88ACE45D9B6062BE1 /* OffBitTrial-101.otf */; };
+		950115C3CDDD4C699AFABA1B /* OffBitTrial-DotBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EC004680CF97452BA4D7FD9C /* OffBitTrial-DotBold.otf */; };
+		B342593C6C154057BF9CAEDE /* OffBitTrial-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7864C6E4A471F84903AB9 /* OffBitTrial-Regular.otf */; };
+		F03DE6C74C924A6C8748B68C /* OffBitTrial-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 98804146E4C04237BC662044 /* OffBitTrial-Bold.otf */; };
+		F6D4B0A9C10840E394289895 /* OffBitTrial-101Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFEC871589E4C999973407C /* OffBitTrial-101Bold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,13 +43,19 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = animationSample/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = animationSample/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-animationSample-animationSampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-animationSample-animationSampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		386D86E8719941C1AE5A72CF /* OffBitTrial-Dot.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OffBitTrial-Dot.otf"; path = "../assets/fonts/OffBitTrial-Dot.otf"; sourceTree = "<group>"; };
+		3AA7864C6E4A471F84903AB9 /* OffBitTrial-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OffBitTrial-Regular.otf"; path = "../assets/fonts/OffBitTrial-Regular.otf"; sourceTree = "<group>"; };
+		3AFEC871589E4C999973407C /* OffBitTrial-101Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OffBitTrial-101Bold.otf"; path = "../assets/fonts/OffBitTrial-101Bold.otf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-animationSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-animationSample.debug.xcconfig"; path = "Target Support Files/Pods-animationSample/Pods-animationSample.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-animationSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-animationSample.release.xcconfig"; path = "Target Support Files/Pods-animationSample/Pods-animationSample.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-animationSample-animationSampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-animationSample-animationSampleTests.debug.xcconfig"; path = "Target Support Files/Pods-animationSample-animationSampleTests/Pods-animationSample-animationSampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-animationSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-animationSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = animationSample/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-animationSample-animationSampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-animationSample-animationSampleTests.release.xcconfig"; path = "Target Support Files/Pods-animationSample-animationSampleTests/Pods-animationSample-animationSampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		98804146E4C04237BC662044 /* OffBitTrial-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OffBitTrial-Bold.otf"; path = "../assets/fonts/OffBitTrial-Bold.otf"; sourceTree = "<group>"; };
+		EC004680CF97452BA4D7FD9C /* OffBitTrial-DotBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OffBitTrial-DotBold.otf"; path = "../assets/fonts/OffBitTrial-DotBold.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F97524F88ACE45D9B6062BE1 /* OffBitTrial-101.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OffBitTrial-101.otf"; path = "../assets/fonts/OffBitTrial-101.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +134,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				B4C40DE2ADE344118F8E051F /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -135,6 +148,19 @@
 				00E356EE1AD99517003FC87E /* animationSampleTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B4C40DE2ADE344118F8E051F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F97524F88ACE45D9B6062BE1 /* OffBitTrial-101.otf */,
+				3AFEC871589E4C999973407C /* OffBitTrial-101Bold.otf */,
+				98804146E4C04237BC662044 /* OffBitTrial-Bold.otf */,
+				386D86E8719941C1AE5A72CF /* OffBitTrial-Dot.otf */,
+				EC004680CF97452BA4D7FD9C /* OffBitTrial-DotBold.otf */,
+				3AA7864C6E4A471F84903AB9 /* OffBitTrial-Regular.otf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
@@ -244,6 +270,12 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				86A56881EC2C4FE5A8C2A880 /* OffBitTrial-101.otf in Resources */,
+				F6D4B0A9C10840E394289895 /* OffBitTrial-101Bold.otf in Resources */,
+				F03DE6C74C924A6C8748B68C /* OffBitTrial-Bold.otf in Resources */,
+				286E17D46E854BCFB61E8FC2 /* OffBitTrial-Dot.otf in Resources */,
+				950115C3CDDD4C699AFABA1B /* OffBitTrial-DotBold.otf in Resources */,
+				B342593C6C154057BF9CAEDE /* OffBitTrial-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

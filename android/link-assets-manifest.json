@@ -1,0 +1,29 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/OffBitTrial-101.otf",
+      "sha1": "5c2e0c0ea6542bcabb691fe297eb12045a32425e"
+    },
+    {
+      "path": "assets/fonts/OffBitTrial-101Bold.otf",
+      "sha1": "907acd1d2a6ad794ace29666327d3468eb4179ba"
+    },
+    {
+      "path": "assets/fonts/OffBitTrial-Bold.otf",
+      "sha1": "32864f91904a0fd5e59a596bb8df2138f8bdc49a"
+    },
+    {
+      "path": "assets/fonts/OffBitTrial-Dot.otf",
+      "sha1": "dda24f4dca1a314acbc06e76b0abb7d6bdfb19bd"
+    },
+    {
+      "path": "assets/fonts/OffBitTrial-DotBold.otf",
+      "sha1": "0bf4d833b6484203e19bdf5121ebddaa2d518c45"
+    },
+    {
+      "path": "assets/fonts/OffBitTrial-Regular.otf",
+      "sha1": "0fc84f882e4ecddfd7b9c429d90e812326700e4c"
+    }
+  ]
+}

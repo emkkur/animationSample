@@ -8,7 +8,8 @@
       "@utils/*": ["src/utils/*"],
       "@navigation/*": ["src/navigation/*"],
       "@context/*": ["src/context/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@theme/*": ["src/theme/*"]
     },
     "moduleResolution": "node"
   }
