@@ -1,13 +1,15 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, ReactNode, useEffect, useMemo, useRef, useState} from 'react';
 import {LayoutChangeEvent, Pressable, ViewStyle} from 'react-native';
 
-import {Text} from '@rneui/themed';
+import {useTheme} from '@rneui/themed';
+import {isNullorUndefined} from '@utils/helpers';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Animated, {
   Easing,
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
+  withSequence,
   withSpring,
   withTiming,
   ZoomIn,
@@ -16,32 +18,67 @@ import Animated, {
 import styles from './styles';
 
 type DraggableBallCommonProps = {
+  backgroundColor?: string;
   ballStyles?: ViewStyle;
-  onPlaced?: () => void;
-  onCancel?: () => void;
+  borderColor?: string;
   canCancel: boolean;
-  shouldSnapBack: boolean;
+  children: ReactNode;
   destinationPosition?: {x: number; y: number};
+  destinationRadius: number;
+  onCancel?: () => void;
+  onPlaced?: () => void;
+  radius: number;
+  shouldSnapBack: boolean;
+  Yoffset?: number;
+  nudge: boolean;
 };
 
 const DraggableBall: FC<DraggableBallCommonProps> = ({
-  shouldSnapBack,
-  destinationPosition,
-  onPlaced,
+  backgroundColor,
+  borderColor,
   canCancel,
+  children,
+  destinationPosition,
+  destinationRadius,
   onCancel,
+  onPlaced,
+  radius,
+  shouldSnapBack,
+  Yoffset,
+  nudge,
 }) => {
+  const {theme} = useTheme();
+
   const isPressed = useSharedValue(false);
   const offsetX = useSharedValue(0);
-  const offsetY = useSharedValue(0);
-  const start = useSharedValue({x: 0, y: 0});
+  const offsetY = useSharedValue(0 + (Yoffset ?? 0));
+  const start = useSharedValue({x: 0, y: 0 + (Yoffset ?? 0)});
   const current = useSharedValue({x: 0, y: 0});
   const final = useSharedValue({x: 0, y: 0});
+  const nudgeControl = useSharedValue(0);
+
+  const intervalControl = useRef<number>(0);
 
   const [isLocked, setIsLocked] = useState(false);
+  const [ballPosition, setBallPosition] = useState({x: 0, y: 0});
+
+  const dimensions: ViewStyle = useMemo(
+    () => ({
+      width: radius * 2,
+      height: radius * 2,
+      borderRadius: radius,
+      backgroundColor: backgroundColor ?? theme.colors.secondary,
+      borderColor: borderColor ?? theme.colors.warning,
+      borderWidth: borderColor ? 1 : 0,
+    }),
+    [radius],
+  );
 
   const validateProps = () => {
-    if (shouldSnapBack && (!destinationPosition || !onPlaced)) {
+    if (
+      shouldSnapBack &&
+      (!destinationPosition || !onPlaced || isNullorUndefined(nudge))
+    ) {
       throw new Error(
         'If shouldSnapBack is true then destinationPosition and onPlaced is required',
       );
@@ -60,25 +97,54 @@ const DraggableBall: FC<DraggableBallCommonProps> = ({
       transform: [
         {translateX: offsetX.value},
         {translateY: offsetY.value},
+
         {scale: withSpring(isPressed.value ? 1.2 : 1)},
       ],
-      backgroundColor: isPressed.value ? 'black' : 'blue',
     };
   });
 
+  const nudgeAnimationStyle = useAnimatedStyle(() => ({
+    transform: [
+      {translateX: final.value.x * nudgeControl.value},
+      {translateY: final.value.y * nudgeControl.value},
+    ],
+  }));
+
   const onBallLayout = (e: LayoutChangeEvent) => {
-    if (!destinationPosition) {
-      return;
-    }
     const {x, y} = e.nativeEvent.layout;
-    const translationX = destinationPosition.x - x;
-    const translationY = destinationPosition.y - y;
-    final.value = {x: translationX, y: translationY};
+    setBallPosition({x, y});
   };
+
+  useEffect(() => {
+    if (destinationPosition) {
+      const {x, y} = ballPosition;
+      const translationX =
+        destinationPosition.x - x + (destinationRadius - radius);
+      const translationY =
+        destinationPosition.y - y - destinationRadius - radius;
+      final.value = {x: translationX, y: translationY};
+    }
+  }, [destinationPosition, ballPosition]);
+
+  useEffect(() => {
+    if (nudge) {
+      intervalControl.current = setInterval(
+        () =>
+          (nudgeControl.value = withSequence(
+            withTiming(0.1, {duration: 800}),
+            withTiming(0, {duration: 800}),
+          )),
+        4000,
+      );
+    }
+  }, []);
 
   const gesture = Gesture.Pan()
     .onBegin(() => {
       isPressed.value = true;
+      if (nudge) {
+        runOnJS(clearInterval)(intervalControl.current);
+      }
     })
     .onUpdate(e => {
       offsetX.value = e.translationX + start.value.x;
@@ -95,20 +161,23 @@ const DraggableBall: FC<DraggableBallCommonProps> = ({
     .onFinalize(e => {
       isPressed.value = false;
       if (shouldSnapBack && destinationPosition) {
+        const magnification = 1.5;
         const xParam = {
-          min: destinationPosition.x - 120,
-          max: destinationPosition.x + 120,
+          min: destinationPosition.x - destinationRadius * magnification,
+          max: destinationPosition.x + destinationRadius * magnification,
         };
         const yParam = {
-          min: destinationPosition.y - 120,
-          max: destinationPosition.y + 120,
+          min: destinationPosition.y - destinationRadius * magnification,
+          max: destinationPosition.y + destinationRadius * magnification,
         };
         const {absoluteX, absoluteY} = e;
+        const xPos = absoluteX;
+        const yPos = absoluteY;
         if (
-          xParam.min <= absoluteX &&
-          absoluteX <= xParam.max &&
-          yParam.min <= absoluteY &&
-          absoluteY <= yParam.max
+          xParam.min <= xPos &&
+          xPos <= xParam.max &&
+          yParam.min <= yPos &&
+          yPos <= yParam.max
         ) {
           offsetX.value = withTiming(final.value.x, {duration: 50});
           offsetY.value = withTiming(final.value.y, {duration: 50});
@@ -119,15 +188,18 @@ const DraggableBall: FC<DraggableBallCommonProps> = ({
         }
         if (!isLocked) {
           offsetX.value = withTiming(0, {duration: 200});
-          offsetY.value = withTiming(0, {duration: 200});
-          start.value = {x: 0, y: 0};
+          offsetY.value = withTiming(0 + (Yoffset ?? 0), {duration: 200});
+          start.value = {x: 0, y: 0 + (Yoffset ?? 0)};
         }
       }
     });
 
   const snapBack = () => {
     offsetX.value = withTiming(0, {duration: 200, easing: Easing.linear});
-    offsetY.value = withTiming(0, {duration: 200, easing: Easing.linear});
+    offsetY.value = withTiming(0 + (Yoffset ?? 0), {
+      duration: 200,
+      easing: Easing.linear,
+    });
     start.value = {x: 0, y: 0};
     setIsLocked(false);
     onCancel && onCancel();
@@ -136,11 +208,16 @@ const DraggableBall: FC<DraggableBallCommonProps> = ({
   return (
     <GestureDetector gesture={gesture.enabled(!isLocked)}>
       <Animated.View
-        style={[styles.ball, animatedStyles]}
+        style={[
+          styles.ball,
+          dimensions,
+          nudge && nudgeAnimationStyle,
+          animatedStyles,
+        ]}
         onLayout={onBallLayout}
         entering={ZoomIn}>
         <Pressable onPress={snapBack} style={styles.ball} disabled={!canCancel}>
-          <Text style={styles.text}>Landing Page</Text>
+          {children}
         </Pressable>
       </Animated.View>
     </GestureDetector>

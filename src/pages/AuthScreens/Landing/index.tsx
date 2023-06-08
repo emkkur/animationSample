@@ -33,17 +33,18 @@ const Landing: FC<AuthParamProps<'Landing'>> = ({navigation}) => {
           <PageOne
             onPageChange={onPageForward}
             triggerAnimation={pageIndex === 0}
+            key={0}
           />,
           <PageTwo
             onPageChange={onPageForward}
             triggerAnimation={pageIndex === 1}
+            key={1}
           />,
         ]}
         renderItem={({item}) => item}
         horizontal
         pagingEnabled
         removeClippedSubviews
-        keyExtractor={(_, index) => index.toString()}
         scrollEnabled={false}
       />
     </SafeAreaView>
