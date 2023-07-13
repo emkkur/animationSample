@@ -1,12 +1,19 @@
 import {FC, useMemo, useState} from 'react';
 import {LayoutChangeEvent, View} from 'react-native';
+import {Dimensions} from 'react-native';
 
 import DraggableBall from '@components/DraggableBall';
 import {AuthParamProps} from '@navigation/AuthParamList';
 import {Text, useTheme} from '@rneui/themed';
-import Animated from 'react-native-reanimated';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withTiming,
+} from 'react-native-reanimated';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {WebView} from 'react-native-webview';
 
 import getStyles from './styles';
 
@@ -17,8 +24,11 @@ const Login: FC<AuthParamProps<'Login'>> = () => {
   const {theme} = useTheme();
   const insets = useSafeAreaInsets();
   const styles = useMemo(() => getStyles(theme, insets), []);
-
+  const safeAreaHeight = Dimensions.get('window').height - insets.top - 100;
+  const [selectedMethod, setSelectedMethod] = useState<string>();
   const [landingPosititon, setLandingPosition] = useState({x: 0, y: 0});
+
+  console.log(selectedMethod);
 
   const onLandingLayout = (e: LayoutChangeEvent) => {
     const {x, y} = e.nativeEvent.layout;
@@ -26,16 +36,39 @@ const Login: FC<AuthParamProps<'Login'>> = () => {
     setLandingPosition({x, y: y + 100});
   };
 
+  const width = useSharedValue(0);
+  const height = useSharedValue(1);
+
+  const loginViewWidthStyle = useAnimatedStyle(() => {
+    return {
+      width: width.value,
+      height: height.value,
+    };
+  });
+
+  const onPlaced = (method: string) => () => {
+    setSelectedMethod(method);
+    width.value = withTiming(400, {duration: 2000});
+    height.value = withDelay(
+      2000,
+      withTiming(safeAreaHeight, {duration: 2000}),
+    );
+  };
+  const onCancel = (method: string) => () => {
+    setSelectedMethod(method);
+    width.value = withTiming(0, {duration: 2000});
+    height.value = withTiming(0, {duration: 2000});
+  };
+
   const renderLoginMethods = () => {
-    const onComplete = (method: string) => () => {};
     return icons.map((iconName, index) => (
       <DraggableBall
         canCancel
         destinationPosition={landingPosititon}
         destinationRadius={50}
         key={iconName}
-        onCancel={onComplete(iconName)}
-        onPlaced={onComplete(iconName)}
+        onCancel={onCancel(iconName)}
+        onPlaced={onPlaced(iconName)}
         radius={38}
         shouldSnapBack
         Yoffset={offset[index]}
@@ -62,6 +95,12 @@ const Login: FC<AuthParamProps<'Login'>> = () => {
           {renderLoginMethods()}
         </View>
       </View>
+      <Animated.View style={[styles.animatedWebView, loginViewWidthStyle]}>
+        <WebView
+          source={{uri: 'https://www.google.com/'}}
+          style={styles.webView}
+        />
+      </Animated.View>
     </SafeAreaView>
   );
 };
