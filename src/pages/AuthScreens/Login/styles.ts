@@ -55,6 +55,21 @@ const getStyles = (theme: ThemeType, insets: EdgeInsets) =>
     titleStyle: {
       color: theme.colors.secondary,
     },
+    animatedWebView: {
+      backgroundColor: 'white',
+      zIndex: 2,
+      alignItems: 'center',
+      justifyContent: 'center',
+      alignSelf: 'center',
+      position: 'absolute',
+      bottom: 100,
+      overflow: 'hidden',
+      borderRadius: 25,
+    },
+    webView: {
+      height: 100,
+      width: 100,
+    },
   });
 
 export default getStyles;
