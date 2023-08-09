@@ -25,14 +25,12 @@ const Login: FC<AuthParamProps<'Login'>> = () => {
   const insets = useSafeAreaInsets();
   const styles = useMemo(() => getStyles(theme, insets), []);
   const safeAreaHeight = Dimensions.get('window').height - insets.top - 100;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedMethod, setSelectedMethod] = useState<string>();
   const [landingPosititon, setLandingPosition] = useState({x: 0, y: 0});
 
-  console.log(selectedMethod);
-
   const onLandingLayout = (e: LayoutChangeEvent) => {
     const {x, y} = e.nativeEvent.layout;
-    console.log(x, y);
     setLandingPosition({x, y: y + 100});
   };
 
